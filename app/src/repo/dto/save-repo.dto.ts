@@ -4,6 +4,7 @@ import { IsDate, IsOptional, IsString } from 'class-validator'
 export class SaveRepoDto {
 	@ApiProperty({ description: 'link to the repository' })
 	@IsString({ each: true })
+	@Transform(({ value }) => (Array.isArray(value) ? value : [value]))
 	readonly link: string[];
 
 	@IsOptional({ each: true })
