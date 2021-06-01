@@ -46,7 +46,7 @@ export class ChangedFilesService {
 			arrOfAllPullsSeparated.push(res);
 		}
 
-		let mergerArrOfPulls = [].concat.apply([], arrOfAllPullsSeparated);
+		let mergerArrOfPulls = [].concat(...arrOfAllPullsSeparated);
 
 
 
