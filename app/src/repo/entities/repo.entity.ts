@@ -7,8 +7,8 @@ import { Document, Types, Schema as MongooseSchema } from 'mongoose'
 @Schema()
 export class Repo extends Document {
 
-	@Prop([String])
-	link: string[];
+	@Prop()
+	link: String[];
 
 	@IsOptional()
 	@Prop()
@@ -16,7 +16,7 @@ export class Repo extends Document {
 
 	@Prop({ type: MongooseSchema.Types.ObjectId, ref: 'ChangedFiles' })
 	changed_files: Types.ObjectId
-	
+
 	@Prop({ type: Date, default: Date.now() })
 	createdAt: Date;
 
