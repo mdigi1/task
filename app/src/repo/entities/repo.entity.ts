@@ -4,7 +4,9 @@ import { Document, Types, Schema as MongooseSchema } from 'mongoose'
 // import { Commits } from './commits.entity';
 
 
-@Schema()
+@Schema({
+	timestamps: true,
+})
 export class Repo extends Document {
 
 	@Prop([String])
