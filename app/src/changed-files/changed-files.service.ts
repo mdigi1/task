@@ -98,7 +98,7 @@ export class ChangedFilesService {
 	}
 
 	async counterFunction(arr: Array<number>): Promise<number[]> {
-		let arrOfResult = [];
+		let arrOfResult = []
 		let result = await arr.reduce((data, curr) => {
 			data[curr] = data[curr] ? ++data[curr] : 1;
 			return data;

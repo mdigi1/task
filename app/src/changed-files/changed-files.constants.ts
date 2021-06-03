@@ -10,5 +10,5 @@ export const issues = {
 }
 
 export const ACCESS_TOKEN = {
-	token: 'access_token=******************************************'
+	token: 'access_token=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'
 }
