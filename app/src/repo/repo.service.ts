@@ -40,11 +40,20 @@ export class RepoService {
 	}
 
 	// save repository exist and other information 
-	async saveRepo(saveRepoDto: SaveRepoDto): Promise<string> {
-		const link = await this.repoModel.findOne({ link: saveRepoDto.link }).exec();
-		const cuttedLink = JSON.stringify(saveRepoDto.link).slice(21, -2);
+	async saveRepo(saveRepoDto: SaveRepoDto) {
+		let res = []
+		for (let i = 0; i < saveRepoDto.link.length; i++) {
+			let separatedLink = { link: saveRepoDto.link[i] }
+			res.push(await this.saveRepoAndChangedFiles(separatedLink))
+		}
+		return res
+	}
+
+	async saveRepoAndChangedFiles(linkObj) {
+		const link = await this.repoModel.findOne({ link: linkObj.link }).exec();
+		const cuttedLink = JSON.stringify(linkObj).slice(28, -2);
 		if (link == null) {
-			const repo = new this.repoModel(saveRepoDto);
+			const repo = new this.repoModel(linkObj);
 			repo.changed_files = await this.changedFilesService.saveChangedFiles(cuttedLink);
 			await repo.save();
 			return `repository ${repo.link} is successfully added to DB. id: ${repo._id}`
@@ -54,7 +63,6 @@ export class RepoService {
 			return `repository is refetched. id: ${updated.id}`
 		}
 	}
-
 	// add comment
 	async updateRepo(id: string, updateRepoDto: UpdateRepoDto): Promise<Repo> {
 		try {
