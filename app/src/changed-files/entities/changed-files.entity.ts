@@ -16,6 +16,9 @@ export class ChangedFiles extends Document {
 
 	@Prop()
 	pullURL: String;
+	
+	@Prop({ type: Date, default: Date.now() })
+	createdAt: Date;
 
 
 
