@@ -1,12 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsDate, IsOptional, IsString } from 'class-validator'
+import { IsArray, IsDate, IsOptional, IsString } from 'class-validator'
 
 export class SaveRepoDto {
 	@ApiProperty({ description: 'link to the repository' })
 	@IsString({ each: true })
+	@IsArray()
 	@Transform(({ value }) => (Array.isArray(value) ? value : [value]))
-	readonly link: string[];
+	link: string[];
 
 	@IsOptional({ each: true })
 	sha: string[];
